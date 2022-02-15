@@ -1,1 +1,1 @@
-from .vendor import Vendor
+from .vendor import Hello, Vendor
