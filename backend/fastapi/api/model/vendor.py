@@ -33,3 +33,7 @@ class Hello(SQLiteBase):
         db.commit()
         db.refresh(doc)
         return doc
+
+    @classmethod
+    def read(cls, db: Session):
+        return db.query(cls).all()

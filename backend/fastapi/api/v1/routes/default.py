@@ -8,7 +8,7 @@ from ...core.router import APIRouter
 from ...model import Hello as HelloInDB
 from ...model import Vendor as VendorInDB
 from ..depends import get_db
-from ..schema import Vendor
+from ..schema import *
 
 vendor_database = [
    VendorInDB(country='MX', commodity='mango', variable_overhead=Decimal('1.24')),
@@ -40,6 +40,11 @@ async def estimate(unit_price: int, volume: int):
     ])
 
 
-@router.get('/test')
-async def test(db: Session = Depends(get_db)):
-    HelloInDB.create(db=db, message='hello world')
+@router.get('/test', response_model=list[Hello])
+async def hello_read(db: Session = Depends(get_db)):
+    return HelloInDB.read(db=db)
+
+
+@router.post('/test', response_model=Hello)
+async def hello_create(data: HelloCreate, db: Session = Depends(get_db)):
+    return HelloInDB.create(db=db, message=data.message)
