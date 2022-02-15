@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+
 from ..router import router as api_router
 from .config import Settings
 

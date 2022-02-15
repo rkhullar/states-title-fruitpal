@@ -1,9 +1,10 @@
+from decimal import Decimal
+
+from fastapi.encoders import jsonable_encoder
+
 from ...core.router import APIRouter
 from ...model import Vendor as VendorInDB
 from ..schema import Vendor
-from fastapi.encoders import jsonable_encoder
-from decimal import Decimal
-
 
 vendor_database = [
    VendorInDB(country='MX', commodity='mango', variable_overhead=Decimal('1.24')),
