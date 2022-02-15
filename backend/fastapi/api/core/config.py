@@ -15,9 +15,5 @@ class NetworkSettings(BaseSettings):
     service_port: int = int(os.getenv('SERVICE_PORT', '8000'))
 
 
-class SQLiteSettings(BaseSettings):
-    pass
-
-
-class Settings(ProjectSettings, NetworkSettings, SQLiteSettings):
+class Settings(ProjectSettings, NetworkSettings):
     pass
