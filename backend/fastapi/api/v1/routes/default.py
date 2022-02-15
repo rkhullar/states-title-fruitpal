@@ -1,8 +1,9 @@
 from decimal import Decimal
 
+from sqlalchemy.orm import Session
+
 from fastapi import Depends
 from fastapi.encoders import jsonable_encoder
-from sqlalchemy.orm import Session
 
 from ...core.router import APIRouter
 from ...model import Hello as HelloInDB

@@ -4,7 +4,7 @@ from decimal import Decimal
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import Session
 
-from ..core.util import SQLiteBase
+from ..core.util import SQLiteBase, document_extras
 
 
 @dataclass
@@ -20,19 +20,12 @@ class Vendor:
         return (unit_price + self.variable_overhead) * volume
 
 
+@document_extras
 class Hello(SQLiteBase):
     __tablename__ = 'hello'
 
     id = Column(Integer, primary_key=True, index=True)
     message = Column(String, unique=True, index=True)
-
-    @classmethod
-    def create(cls, db: Session, message: str):
-        doc = cls(message=message)
-        db.add(doc)
-        db.commit()
-        db.refresh(doc)
-        return doc
 
     @classmethod
     def read(cls, db: Session):

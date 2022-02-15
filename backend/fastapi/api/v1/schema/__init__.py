@@ -1,2 +1,2 @@
-from .vendor import Vendor
 from .hello import Hello, HelloCreate
+from .vendor import Vendor
