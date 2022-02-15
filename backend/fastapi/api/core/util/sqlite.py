@@ -15,7 +15,9 @@ SQLiteBase = declarative_base()
 
 
 def _build_extra(kls: type[SQLiteBase]):
+
     class DocumentExtras:
+
         @classmethod
         def create(cls, db: Session, **data) -> kls:
             doc = kls(**data)
@@ -23,6 +25,15 @@ def _build_extra(kls: type[SQLiteBase]):
             db.commit()
             db.refresh(doc)
             return doc
+
+        @classmethod
+        def query(cls, db: Session, **criteria) -> list[kls]:
+            criteria = {key: val for key, val in criteria.items() if val is not None}
+            query_set = db.query(kls)
+            if criteria:
+                query_set = query_set.filter_by(**criteria)
+            return query_set.all()
+
     return DocumentExtras
 
 
@@ -33,5 +44,5 @@ def _inject(source: type, target: type, members: list[str]):
 
 def document_extras(cls: type[SQLiteBase]):
     to_inject = _build_extra(cls)
-    _inject(source=to_inject, target=cls, members=['create'])
+    _inject(source=to_inject, target=cls, members=['create', 'query'])
     return cls

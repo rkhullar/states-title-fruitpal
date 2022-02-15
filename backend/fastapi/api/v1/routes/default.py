@@ -18,14 +18,14 @@ vendor_database = [
 router = APIRouter()
 
 
-@router.get('/vendors', response_model=list[Vendor])
-async def list_vendors(db: Session = Depends(get_db)):
-    return VendorInDB.read(db=db)
-
-
 @router.post('/vendors', response_model=Vendor)
 async def create_vendor(data: VendorCreate, db: Session = Depends(get_db)):
     return VendorInDB.create(db=db, **data.dict())
+
+
+@router.get('/vendors', response_model=list[Vendor])
+async def read_vendors(db: Session = Depends(get_db), country: str = None, commodity: str = None):
+    return VendorInDB.query(db=db, country=country, commodity=commodity)
 
 
 @router.get('/estimate')
