@@ -1,4 +1,5 @@
 import uvicorn
+
 from api.core.config import Settings
 from api.core.factory import create_app
 
