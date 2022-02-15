@@ -1,7 +1,7 @@
 from dataclasses import asdict, dataclass
 from decimal import Decimal
 from sqlalchemy import Column, String, Integer
-from .sqlite import Base as SQLiteBase
+from ..core.util import SQLiteBase
 
 
 @dataclass
