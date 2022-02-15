@@ -16,3 +16,8 @@ class VendorCreate(VendorBase):
 class Vendor(VendorBase):
     class Config:
         orm_mode = True
+
+
+class Estimate(BaseModel):
+    country: str
+    purchase_cost: Decimal

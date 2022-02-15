@@ -1,1 +1,1 @@
-from .vendor import Vendor, VendorCreate
+from .vendor import Estimate, Vendor, VendorCreate
