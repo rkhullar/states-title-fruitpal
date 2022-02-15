@@ -4,8 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-project_root = Path(__file__).parents[3]
-database_path = project_root / 'local' / 'sqlite.db'
+database_path = Path(__file__).parents[3] / 'local' / 'sqlite.db'
 if not database_path.parent.exists():
     database_path.parent.mkdir()
 
