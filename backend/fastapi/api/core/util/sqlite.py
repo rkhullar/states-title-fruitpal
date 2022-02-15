@@ -11,4 +11,4 @@ if database_path.parent.exists():
 database_url = f'sqlite:///{database_path}'
 engine = create_engine(database_url, connect_args={'check_same_thread': False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
+SQLiteBase = declarative_base()
