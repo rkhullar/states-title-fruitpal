@@ -3,7 +3,7 @@ from decimal import Decimal
 from sqlalchemy import desc
 from sqlalchemy.orm import Session
 
-from fastapi import Depends
+from fastapi import Depends, HTTPException
 
 from ...core.router import APIRouter
 from ...model import Vendor as VendorInDB
@@ -21,7 +21,8 @@ router = APIRouter()
 
 @router.post('/vendors', response_model=Vendor)
 async def create_vendor(data: VendorCreate, db: Session = Depends(get_db)):
-    # TODO: check doc already exists before creating
+    if VendorInDB.query(db=db, country=data.country, commodity=data.commodity):
+        raise HTTPException(status_code=400, detail='vendor already exists')
     return VendorInDB.create(db=db, **data.dict())
 
 
