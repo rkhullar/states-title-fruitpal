@@ -1,29 +1,21 @@
 from dataclasses import dataclass
-from .model import Vendor, Estimate
-from urllib.parse import urljoin
 
-from .util import async_httpx
+from .model import Estimate, Vendor
+from .util import BaseClient
 
 
 @dataclass
-class FruitPalClient:
-    base_url: str
+class FruitPalClient(BaseClient):
 
-    def path(self, uri: str) -> str:
-        # TODO: strip leading slash first
-        return urljoin(self.base_url, f'/api/v1/{uri}')
+    def create_vendor(self, **kwargs) -> Vendor:
+        vendor = Vendor(**kwargs)
+        response = self.post('vendors', json=vendor.to_dict())
+        response.raise_for_status()
+        data = response.json()
+        return Vendor.from_dict(data)
 
-    async def _get(self, uri: str, **kwargs):
-        return await async_httpx(method='get', url=self.path(uri), **kwargs)
-
-    async def _post(self, uri: str, **kwargs):
-        return await async_httpx(method='post', url=self.path(uri), **kwargs)
-
-    async def create_vendor(self):
+    def read_vendors(self) -> list[Vendor]:
         pass
 
-    async def read_vendors(self):
-        pass
-
-    async def estimate(self):
+    def estimate(self) -> Estimate:
         pass
