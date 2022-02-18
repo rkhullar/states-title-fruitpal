@@ -1,11 +1,25 @@
-### alembic
+## Fruitpal
+
+### Backend
+```sh
+```
+
+### Library
+
+```sh
+python setup.py bdist_wheel
+```
+
+### Notes
+
+#### alembic
 ```sh
 cd path/to/backend/fastapi
 alembic revision --autogenerate -m 'first migration'
 alembic upgrade head
 ```
 
-### links
+#### links
 - https://fastapi.tiangolo.com/tutorial/sql-databases
 - https://restfulapi.net/resource-naming
 - https://github.com/jubins/Fruitpal

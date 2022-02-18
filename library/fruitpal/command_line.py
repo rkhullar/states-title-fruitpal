@@ -8,7 +8,7 @@ def build_parser() -> ArgumentParser:
     parser = ArgumentParser()
     parser.add_argument('--base-url', action=default_to_env('FRUITPAL_BASE_URL'))
 
-    actions = ['import-vendors', 'estimate']
+    actions = ['import-vendors', 'read-vendors', 'estimate']
     subparsers = parser.add_subparsers(dest='action')
     subparsers.required = True
 
