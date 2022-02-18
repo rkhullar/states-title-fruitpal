@@ -23,10 +23,16 @@ def build_parser() -> ArgumentParser:
 def main():
     parser: ArgumentParser = build_parser()
     args: Namespace = parser.parse_args()
-    client = FruitPalClient(base_url=args.base_url)
+    client = FruitPalClient.from_url(args.base_url)
 
     if args.action == 'import-vendors':
-        client.import_vendors(args.path)
+        for vendor in client.import_vendors(args.path):
+            print(vendor)
+
+    elif args.action == 'read-vendors':
+        for vendor in client.read_vendors():
+            print(vendor)
 
     elif args.action == 'estimate':
-        client.estimate(args.commodity, args.unit_price, args.volume)
+        for estimate in client.estimate(args.commodity, args.unit_price, args.volume):
+            print(estimate)

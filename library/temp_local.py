@@ -2,7 +2,10 @@ from decimal import Decimal
 
 from fruitpal.client import FruitPalClient
 
-client = FruitPalClient(protocol='http', host='localhost', port=8000)
+# client = FruitPalClient(scheme='http', host='localhost', port=8000, prefix='/api/v1')
+client = FruitPalClient.from_url('http://localhost:8000/api/v1')
+print(client.base_url)
+
 for vendor in client.read_vendors(commodity='mango'):
     print(vendor)
 
