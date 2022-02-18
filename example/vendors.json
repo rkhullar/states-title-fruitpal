@@ -1,0 +1,12 @@
+[
+    {
+        "commodity": "mango",
+        "country": "MX",
+        "variable_overhead": 1.24
+    },
+    {
+        "commodity": "mango",
+        "country": "BZ",
+        "variable_overhead": 1.42
+    }
+]
