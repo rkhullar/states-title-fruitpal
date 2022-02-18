@@ -1,6 +1,6 @@
 from decimal import Decimal
 
-from sqlalchemy import Column, Float, String
+from sqlalchemy import Column, Numeric, String
 
 from ..core.util import SQLiteBase, document_extras
 
@@ -11,7 +11,7 @@ class Vendor(SQLiteBase):
 
     country: str = Column(String, primary_key=True)
     commodity: str = Column(String, primary_key=True)
-    variable_overhead: Decimal = Column(Float)
+    variable_overhead: Decimal = Column(Numeric)
 
     def calculate_purchase_cost(self, unit_price: int, volume: int) -> Decimal:
         return (unit_price + self.variable_overhead) * volume
