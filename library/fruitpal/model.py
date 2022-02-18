@@ -22,3 +22,7 @@ class Vendor:
 class Estimate:
     country: str
     purchase_cost: Decimal
+
+    @classmethod
+    def from_dict(cls, data: dict) -> 'Estimate':
+        return from_dict(cls, data)

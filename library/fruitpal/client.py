@@ -1,6 +1,8 @@
+import json
 from collections.abc import Iterator
 from dataclasses import dataclass
 from decimal import Decimal
+from pathlib import Path
 
 from .model import Estimate, Vendor
 from .util import BaseClient
@@ -22,5 +24,14 @@ class FruitPalClient(BaseClient):
         for item in response.json():
             yield Vendor.from_dict(item)
 
-    def estimate(self) -> Estimate:
-        pass
+    def import_vendors(self, path: Path | str) -> Iterator[Vendor]:
+        with Path(path).open('r') as f:
+            for item in json.load(f):
+                vendor = Vendor.from_dict(item)
+                yield self.create_vendor(**vendor.to_dict())
+
+    def estimate(self, commodity: str, unit_price: int, volume: int) -> Iterator[Estimate]:
+        response = self.get('estimate', params=dict(commodity=commodity, unit_price=unit_price, volume=volume))
+        response.raise_for_status()
+        for item in response.json():
+            yield Estimate.from_dict(item)

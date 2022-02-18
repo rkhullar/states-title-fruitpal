@@ -17,3 +17,5 @@ vendor_database = [
 # result = client.create_vendor(country='BZ', commodity='mango', variable_overhead=Decimal('1.42'))
 # print(result)
 
+for estimate in client.estimate(commodity='mango', unit_price=53, volume=405):
+    print(estimate)
