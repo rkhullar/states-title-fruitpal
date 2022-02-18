@@ -50,7 +50,7 @@ python -m venv example/venv
 
 NOTE: This may be not be required, but it's good to run `deactivate` when switch between virtual environments.
 
-1. install dependencies for `backend` and `library`
+2. install dependencies for `backend` and `library`
 ```shell
 cd path/to/component
 . venv/bin/activate
@@ -60,34 +60,34 @@ pipenv install --dev
 ```
 
 ##### running fastapi
-1. prepare terminal
+3. prepare terminal
 ```shell
 cd path/to/backend
 . venv/bin/activate
 cd fastapi
 ```
 
-1. create sqlite database
+4. create sqlite database
 ```shell
 alembic upgrade head
 ```
 
-1. start fastapi service
+5. start fastapi service
 ```shell
 python main.py
 ```
 
-1. explore openapi docs
+6. explore openapi docs
 - http://localhost:8000/docs
 
 ##### running client
-1. prepare terminal
+7. prepare terminal
 ```shell
 cd path/to/library
 . venv/bin/activate
 ```
 
-1. package library
+8. package library
 ```shell
 python setup.py bdist_wheel
 rm -rf build *.egg-info
@@ -96,25 +96,25 @@ rm -rf build *.egg-info
 The first command creates three directories: `build` `dist` and `fruitpal.egg-info`. We only need `dist` since it
 contains the wheel file, which we'll install in the `example` virtual environment.
 
-1. install library
+9. install library
 ```shell
 cd path/to/example
 . venv/bin/activate
 pip install ../library/dist/fruitpal-*.whl
 ```
 
-1. configure environment
+10. configure environment
 ```shell
 export FRUITPAL_BASE_URL='http://localhost:8000/api/v1'
 ```
 
-1. import vendors
+11. import vendors
 ```shell
 fruitpal import-vendors vendors.json
 fruitpal read-vendors
 ```
 
-1. show estimate
+12. show estimate
 ```shell
 fruitpal estimate --help
 fruitpal estimate mango 53 403
