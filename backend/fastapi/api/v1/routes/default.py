@@ -1,5 +1,3 @@
-from decimal import Decimal
-
 from sqlalchemy import desc
 from sqlalchemy.orm import Session
 
@@ -9,12 +7,6 @@ from ...core.router import APIRouter
 from ...model import Vendor as VendorInDB
 from ..depends import get_db
 from ..schema import *
-
-vendor_database = [
-   VendorInDB(country='MX', commodity='mango', variable_overhead=Decimal('1.24')),
-   VendorInDB(country='BZ', commodity='mango', variable_overhead=Decimal('1.42'))
-]
-
 
 router = APIRouter()
 
