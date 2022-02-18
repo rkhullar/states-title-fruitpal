@@ -1,11 +1,11 @@
 ## Fruitpal
 
 ### Project
-This projects serves as an example for creating a restful api service with a corresponding client library and cli.
-All three components are written with Python 3.10, and the framework for the backend is FastAPI. The backend stores
+This project serves as an example for creating a restful api service with a corresponding client library and cli.
+All components are written with Python 3.10, and the framework for the backend is FastAPI. The backend stores
 data in SQLite through SQLAlchemy, but in retrospect it would have been better to use MongoDB Atlas and Mongoengine.
 
-The main feature of the problem statement is to provide traders the full cost of buying fruit from various countries.
+The main requirement in the problem statement is to provide traders the full cost of buying fruit from various countries.
 Users provide three points of information to FruitPal as follows:
 - commodity
 - price per ton (dollars)
@@ -33,8 +33,8 @@ The formula for total purchase cost is as follows: Also, the results are sorted 
 (price_per_ton + variable_overhead) * trade_volume => purchase_cost
 ```
 ```text
-(53+1.42)*405 => $22,040.10
-(53+1.24)*405 => $21,967.20
+(53 + 1.42) * 405 => $22,040.10
+(53 + 1.24) * 405 => $21,967.20
 ```
 
 ### Instructions  
@@ -59,7 +59,7 @@ pip install pipenv
 pipenv install --dev
 ```
 
-##### running fastapi
+##### Running FastAPI
 3. prepare terminal
 ```shell
 cd path/to/backend
@@ -80,7 +80,7 @@ python main.py
 6. explore openapi docs
 - http://localhost:8000/docs
 
-##### running client
+##### Running Client
 7. prepare terminal
 ```shell
 cd path/to/library
