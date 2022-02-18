@@ -11,7 +11,7 @@ class Vendor(SQLiteBase):
 
     country: str = Column(String, primary_key=True)
     commodity: str = Column(String, primary_key=True)
-    variable_overhead: Decimal = Column(Numeric)
+    variable_overhead: Decimal = Column(Numeric, nullable=False)
 
     def calculate_purchase_cost(self, unit_price: int, volume: int) -> Decimal:
         return (unit_price + self.variable_overhead) * volume

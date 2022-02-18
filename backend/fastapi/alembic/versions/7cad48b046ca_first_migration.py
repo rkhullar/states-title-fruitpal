@@ -1,15 +1,16 @@
 """first migration
 
-Revision ID: aff96c9b9167
+Revision ID: 7cad48b046ca
 Revises: 
-Create Date: 2022-02-15 19:03:06.517842
+Create Date: 2022-02-17 21:34:05.017637
 
 """
-import sqlalchemy as sa
 from alembic import op
+import sqlalchemy as sa
+
 
 # revision identifiers, used by Alembic.
-revision = 'aff96c9b9167'
+revision = '7cad48b046ca'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -20,7 +21,7 @@ def upgrade():
     op.create_table('vendors',
     sa.Column('country', sa.String(), nullable=False),
     sa.Column('commodity', sa.String(), nullable=False),
-    sa.Column('variable_overhead', sa.Float(), nullable=True),
+    sa.Column('variable_overhead', sa.Numeric(), nullable=False),
     sa.PrimaryKeyConstraint('country', 'commodity')
     )
     # ### end Alembic commands ###
