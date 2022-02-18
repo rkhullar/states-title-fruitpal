@@ -48,44 +48,88 @@ python -m venv library/venv
 python -m venv example/venv
 ```
 
+NOTE: This may be not be required, but it's good to run `deactivate` when switch between virtual environments.
+
 1. install dependencies for `backend` and `library`
 ```shell
-cd path/to/venv
+cd path/to/component
 . venv/bin/activate
 pip install -U pip setuptools
 pip install pipenv
 pipenv install --dev
 ```
 
+##### running fastapi
+1. prepare terminal
+```shell
+cd path/to/backend
+. venv/bin/activate
+cd fastapi
+```
+
 1. create sqlite database
 ```shell
-cd path/to/backend/fastapi
 alembic upgrade head
 ```
 
-
-
-
-### Backend
+1. start fastapi service
 ```shell
+python main.py
 ```
 
-### Library
+1. explore openapi docs
+- http://localhost:8000/docs
 
+##### running client
+1. prepare terminal
+```shell
+cd path/to/library
+. venv/bin/activate
+```
+
+1. package library
 ```shell
 python setup.py bdist_wheel
+rm -rf build *.egg-info
 ```
 
-### Notes
+The first command creates three directories: `build` `dist` and `fruitpal.egg-info`. We only need `dist` since it
+contains the wheel file, which we'll install in the `example` virtual environment.
 
-#### alembic
+1. install library
+```shell
+cd path/to/example
+. venv/bin/activate
+pip install ../library/dist/fruitpal-*.whl
+```
+
+1. configure environment
+```shell
+export FRUITPAL_BASE_URL='http://localhost:8000/api/v1'
+```
+
+1. import vendors
+```shell
+fruitpal import-vendors vendors.json
+fruitpal read-vendors
+```
+
+1. show estimate
+```shell
+fruitpal estimate --help
+fruitpal estimate mango 53 403
+```
+
+#### Random Notes
+
+##### alembic
 ```shell
 cd path/to/backend/fastapi
 alembic revision --autogenerate -m 'first migration'
 alembic upgrade head
 ```
 
-#### links
+#### Links
 - https://fastapi.tiangolo.com/tutorial/sql-databases
 - https://restfulapi.net/resource-naming
 - https://github.com/jubins/Fruitpal
