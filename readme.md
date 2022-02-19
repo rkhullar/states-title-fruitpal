@@ -1,9 +1,10 @@
 ## Fruitpal
 
 ### Project
-This project serves as an example for creating a restful api service with a corresponding client library and cli.
-All components are written with Python 3.10, and the framework for the backend is FastAPI. The backend stores
-data in SQLite through SQLAlchemy, but in retrospect it would have been better to use MongoDB Atlas and Mongoengine.
+This project serves as an example for creating a restful api service with a corresponding client library and cli. Both
+components are written with Python 3.10, and the framework for the backend is [FastAPI](https://fastapi.tiangolo.com).
+The backend stores data in SQLite through [SQLAlchemy](https://pypi.org/project/SQLAlchemy), but in retrospect it would
+have been simpler to use [MongoDB Atlas](https://www.mongodb.com/atlas/database) and [mongoengine](https://pypi.org/project/mongoengine).
 
 The main requirement in the problem statement is to provide traders the full cost of buying fruit from various countries.
 Users provide three points of information to FruitPal as follows:
@@ -48,7 +49,7 @@ python -m venv library/venv
 python -m venv example/venv
 ```
 
-NOTE: This may be not be required, but it's good to run `deactivate` when switch between virtual environments.
+NOTE: This may be not be required, but it's good to run `deactivate` when switching between virtual environments.
 
 2. install dependencies for `backend` and `library`
 ```shell
@@ -148,6 +149,11 @@ the caller, but it would be challenging to implement that while keeping the code
 Perhaps one way would be to implement something similar to `httpx.AsyncClient`. Basically the library could provide a
 context manager that wraps that somehow converts the sync requests to async.
 - https://www.python-httpx.org/async
+
+#### Containerization
+Prior to deployment and especially for development teams, it's ideal to utilize a containerization system. This will
+ensure that each member's local environment as well as the hosted environments like staging and prod are running with
+identical dependencies.
 
 #### Random Notes
 
